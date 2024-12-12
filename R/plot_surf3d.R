@@ -4,7 +4,7 @@
 #'
 #' @param surf_data  A numeric vector (length of V) 
 #' @param surf_color  color of the cortical surface. Set to `'grey'` by default
-#' @param cmap A string vector containing 2 to 4 color names/codes specifying the colors to be used for the color scale. If none are specified, appropriate colors will be automatically selected according to `range(surf_data)`
+#' @param cmap A string vector containing 2 to 4 color names/codes specifying the colors to be used for the color scale. See `RColorBrewer::display.brewer.all()` for all possible cmap options. If none are specified, appropriate colors will be automatically selected according to `range(surf_data)`
 #' @param limits A combined pair of numeric vector composed of the lower and upper color scale limits of the plot. When left unspecified, the symmetrical limits `c(-max(abs(surf_dat),max(abs(surf_dat)))` will be used. 
 #' @param atlas atlas used for identifying region labels. 1=Desikan, 2=Destrieux-148, 3=Glasser-360, 4=Schaefer-100, 5=Schaefer-200, 6=Schaefer-400. Set to `1` by default. This argument is ignored for hippocampal surfaces.
 #' @param hemi A string specifying the hemisphere to plot. Possible values are `l` (left), `r` (right) or `b` (both).
@@ -147,7 +147,7 @@ plot_surf3d=function(surf_data, surf_color="grey",cmap,limits, atlas=1, hemi="b"
                         z = coords[,3],
                         i = tri[, 1] - 1,  # plotly uses 0-based indexing, so subtract 1
                         j = tri[, 2] - 1,
-                        k = tri[, 3] - 1,facecolor=surf_color)
+                        k = tri[, 3] - 1,facecolor=rep(surf_color,NROW(tri)))
   
   ##overlay statistical map on cortical surface
     fig=add_trace(fig,type = 'mesh3d',

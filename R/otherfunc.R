@@ -124,27 +124,21 @@
 ## FWHM input is measured in mm, which is subsequently converted into mesh units
 smooth_surf=function(surf_data, FWHM, VWR_check=TRUE)
 {
-
-  #Check required python dependencies. If files missing:
+  #gets surface matrix if is surf_data is a list or path
+  surf_data=get_surf_obj(surf_data)
+  
+  #Check required python dependencies. Will skip if smoothing function called as part of modelling smooth_FWHM argument
+  #If files missing:
   #Will prompt the user to get them in interactive session 
   #Will stop if it's a non-interactive session 
-  if (VWR_check == TRUE & length(sys.calls()) <= 1){
+  if (VWR_check == TRUE & deparse(sys.call(-1)[[1]]) != 'model_check'){
     message("Checking for VertexWiseR system requirements ... ")
     #brainstat must be installed for non hippocampal surf to run get_edgelist, check can be skipped for hippocampus (so 14524 vertices)
     if(max(dim(t(surf_data)))==14524) {
     check = VWRfirstrun('python/conda only')}
     else {check = VWRfirstrun(n_vert=max(dim(t(surf_data))))}
     if (!is.null(check)) {return(check)} 
-  } else if(interactive()==FALSE) { return(message('Non-interactive sessions need requirement checks'))}
-  
-  #if surface_data is a path to an object, reads it
-  if(inherits(surf_data,'character')==TRUE)
-  {
-    surf_data=readRDS(surf_data)
-    #if also contained a subject list, only the surface data is kept
-    if(inherits(surf_data,'list')==TRUE)
-    {surf_data=surf_data[[2]]}
-  }
+  } else if(VWR_check == FALSE & interactive()==FALSE) { return(message('Non-interactive sessions need requirement checks'))}
   
   #Solves the "no visible binding for global variable" issue
   . <- mesh_smooth <- NULL 
@@ -178,7 +172,7 @@ smooth_surf=function(surf_data, FWHM, VWR_check=TRUE)
     edgelist_hip <- get('edgelist_hip') 
     edgelist <- edgelist_hip@data
     FWHM=FWHM/0.5 #converting m to mesh units
-  } else {stop("surf_data vector should only contain 20484 (fsaverage5), 81924 (fsaverage6) or 14524 (hippocampal vertices) columns")}
+  } else {stop("surf_data vector should only contain 20484 (fsaverage5), 81924 (fsaverage6), 64984 (fslr32k) or 14524 (hippocampal vertices) columns")}
 
   #to mask out the 0-value vertices (e.g., medial wall), so as to prevent the border regions from being significantly diluted by the 0-value vertices	  
   idx0=which(colSums(data.matrix(surf_data))==0)
@@ -1038,3 +1032,32 @@ model_check=function(contrast, model, random, surf_data, smooth_FWHM)
 
  return(model_summary) 
 }
+
+####################################################################
+####################################################################
+###################################################################
+#function to automatically read the surface matrix from a list object outputted by the extracter function (containing both the surface matrix and the list of subjects)
+#if it is a string path to the rds, loads the file first
+
+get_surf_obj=function(surf_data)
+{
+  #if surface_data is a path to an object, reads it
+  if(inherits(surf_data,'character')==TRUE)
+  { #if fails to read the path to the RDS, return error
+    if (is(tryCatch(readRDS(surf_data), error=function(e) e))[1] == 'simpleError') 
+  {stop('The surf_data given is a string and was therefore assumed to be a path to a \'.rds\' surface data file. The path failed to be accessed by readRDS().')} 
+   else 
+   {surf_data=readRDS(file=surf_data)}
+  }
+  
+  #if surf_data contains subject list only read surface object
+  if(inherits(surf_data,'list')==TRUE)
+  { if ('surf_obj' %in% names(surf_data))
+    {surf_data=as.matrix(surf_data$surf_obj)} 
+    else {stop('The surf_data given is a list, but the package does not know which element in the list is meant to be the surface matrix. Please name the element "surf_obj" or enter the matrix as surf_data.'
+    )}
+  }
+
+  return(surf_data)
+}
+ 
