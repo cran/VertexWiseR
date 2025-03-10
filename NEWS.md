@@ -1,4 +1,14 @@
-# VertexWiseR v1.2.0 (to be coming)
+# VertexWiseR v1.2.1 (To be coming)
+
+## NEW FEATURES
+* Reticulate's [last update](https://posit.co/blog/reticulate-1-41/) allows users to install ephemeral Python environments with UV instead of requiring a stable Python/Miniconda installation. If users create their own with py_require() before running VertexWiseR, such environment will be selected automatically. If no Python environment is found, VertexWiseR now gives the choice to either install an ephemeral environment with UV, or to install Miniconda or Python via the classic ways.
+
+## FIXES
+* SURFvextract() now gives a proper error message if subjects' surface measure files could not be found. It also will get rid of the sublist.txt which was outputted automatically if subj_ID was set to FALSE. 
+* Fix for messages that were silenced by mistake during Miniconda's installations process.
+* Fix for the script using pip/pip3 to install properly vtk (9.3.1) when choosing the classic Python installation.
+
+# VertexWiseR v1.2.0
 
 ## NEW FEATURES
 

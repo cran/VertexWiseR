@@ -7,7 +7,7 @@
 #' @param sdirpath A string object containing the path to the 'FreeSurfer' preprocessed subjects directory. This directory must be the output directory from a [FreeSurfer preprocessing recon-all pipeline](https://surfer.nmr.mgh.harvard.edu/fswiki/recon-all). Default is the current working directory ("./").
 #' @param filename A string object containing the desired name of the output RDS file. Default is 'brain_measure.rds' in the R temporary directory (tempdir()).
 #' @param template A string object containing the name of surface template (available: 'fsaverage5', 'fsaverage6'). Default is fsaverage5.
-#' @param measure A string object containing the name of the measure of interest. Options are thickness, curv, sulc, area, and volume (for freesurfer 7.4.1 or later). Default is thickness.
+#' @param measure A string object containing the name of the measure of interest. Options include thickness, curv, sulc, area, and volume (for freesurfer 7.4.1 or later). Default is thickness. Note that non-standard surface measures stored in "surf/" also work, provided the full name and extension following lh./rh. is given (e.g., "w-g.pct.mgh" for grey-white matter contrast).
 #' @param subj_ID A logical object stating whether to include subject IDs (folder names in the subjects directory) as a first column to the output matrix. Default is TRUE.
 #' @param fshomepath An optional string object containing the path to the FreeSurfer installation directory. This makes sure R accesses FreeSurfer if the system environment variables are not inherited — as would be the case if you are running the function from RStudio.
 #'
@@ -70,6 +70,9 @@ onlysubjsurf=alldirs[-grep("fsaverage5|fsaverage6|fsaverage", alldirs)]
 if(length(onlysubjsurf) > 0) {alldirs=onlysubjsurf}
 #checks subject with specific surf measure data (rh.measure file) 
 sublist=list.files(paste0(sdirpath, alldirs), pattern=paste0("rh.",measure), recursive=TRUE, full.names=TRUE)
+#If the sublist is empty, return error message
+if (identical(sublist, character(0)))
+{stop(paste0("No surface file for the given measure (lh.", measure, ", rh.",measure,") could be found in the subjects' surf/ directories."))}
 #flags subjects with no appropriate surf measure data inside surf/
 missinglist=dirname(alldirs[! paste0(sdirpath, alldirs) 
                             %in% dirname(sublist)])
@@ -86,6 +89,10 @@ Sys.setenv(SUBJECTS_DIR=sdirpath)
 system(paste0("ln -s $FREESURFER_HOME/subjects/", template, " -t $SUBJECTS_DIR"), ignore.stderr = TRUE)
 system(paste0("mris_preproc --f $SUBJECTS_DIR/sublist.txt --target ", template, " --hemi lh --meas ", measure, " --surfreg sphere.reg --out $SUBJECTS_DIR/lh.mgh \n 
        mris_preproc --f $SUBJECTS_DIR/sublist.txt --target ", template, " --hemi rh --meas ", measure, " --surfreg sphere.reg --out $SUBJECTS_DIR/rh.mgh"));
+
+#removes the sublist.txt if subject list was not required by user
+if (subj_ID == FALSE) 
+{file.remove(paste0(sdirpath,'/sublist.txt'));}
 
 #Reads mgh files to stores and assign the thickness values to each subject in a matrix object usable by VertexWiseR. Appends a column with the subject IDs if required by the user.
 if (subj_ID == TRUE) 
