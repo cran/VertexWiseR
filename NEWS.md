@@ -1,4 +1,12 @@
-# VertexWiseR v1.2.1 (To be coming)
+# VertexWiseR v1.3.0
+
+## NEW FEATURES
+* TFCE computation is now optimized for speed: previously, the parallel steps in the foreach loop were building the linear model again every time; now the model will be saved as a file in a temporary directory (tempdir(), which automatically gets cleaned up), and this file will be loaded within the foreach loop instead.
+ 
+## FIXES
+* TFCE_vertex_analysis_mixed(): The random variable was not being  processed identically in BrainStat between the permuted and unpermuted model, because of a setting factorizing the variable in only one case. Now random variables are both factorized. This affected the coefficients and t-stat estimations, and the results of Example 2, which no longer shows negative clusters. This makes the outcome more consistent with the RFT results (TFCE being more conservative). We apologise for overlooking this inconsistency in the code. Please refer to Example 2 as presented in the package 1.3.0 vignette and website page for the accurate results.
+
+# VertexWiseR v1.2.1
 
 ## NEW FEATURES
 * Reticulate's [last update](https://posit.co/blog/reticulate-1-41/) allows users to install ephemeral Python environments with UV instead of requiring a stable Python/Miniconda installation. If users create their own with py_require() before running VertexWiseR, such environment will be selected automatically. If no Python environment is found, VertexWiseR now gives the choice to either install an ephemeral environment with UV, or to install Miniconda or Python via the classic ways.
