@@ -42,8 +42,8 @@ VWRfirstrun=function(requirement="any", n_vert=0, promptless=FALSE)
   if  (n_vert==64984)
   {requirement='fslr32k'}
   #is yeo parcellation data in brainstat_data?
-  if (n_vert>0 & n_vert!=20484 & n_vert!=81924 & n_vert!=64984)
-  {requirement='yeo_parcels'} 
+  #if (n_vert>0 & n_vert!=20484 & n_vert!=81924 & n_vert!=64984)
+  #{requirement='yeo_parcels'} 
   
   # If custom installation paths have been defined by the user, source
   # them from the package directory:
@@ -346,7 +346,7 @@ if (requirement!="python/conda only" & requirement!='conda/brainstat')
     {
       missingobj=1
       
-      choice = utils::menu(c("Default", "Custom"), title='By Default, BrainStat stores data required for analyses in $HOME_DIR/brainstat_data/. Alternatively, you may want to specify your own custom path for the BrainStat data. Where do you want BrainStat data to be saved?\n')
+      choice = utils::menu(c("Default", "Custom"), title=paste0('By Default, BrainStat stores data required for analyses in ', fs::path_home(), '/brainstat_data/. Alternatively, you may want to specify your own custom path for the BrainStat data. Where do you want BrainStat data to be saved?\n'))
       if (choice==1)  #set path to $HOME_DIR by default
       {
         message(paste('The brainstat_data directory will be located in',
@@ -461,26 +461,26 @@ if (requirement!="python/conda only" & requirement!='conda/brainstat')
     } 
     
     #Yeo parcellatio data
-    if ((requirement=="any" | requirement=='fsaverage6' | requirement=='fsaverage5' | requirement=='fslr32k' | requirement=='yeo_parcels')==TRUE 
-        & !file.exists(paste0(brainstat_data_path,'/brainstat_data/parcellation_data/__MACOSX/')))
-    {
-      missingobj=1
-      
-      prompt = utils::menu(c("Yes", "No"), title=paste("VertexWiseR could not find BrainStat's yeo parcellation data in", brainstat_data_path, ". They are fetched by default by BrainStat for vertex-wise linear models to run and cannot be ignored. \n Do you want the yeo parcellation data (~1.01 MB) to be downloaded now?"))
-      
-      if (prompt==1){    
-        brainstat.datasets.base=reticulate::import("brainstat.datasets.base", delay_load = TRUE)
-        try(brainstat.datasets.base$fetch_parcellation(template="fsaverage",atlas="yeo", n_regions=7, data_dir = paste0(brainstat_data_path,'/brainstat_data/parcellation_data/')), 
-            silent=TRUE)}  
-      
-      else if  (requirement=='fsaverage6' | requirement=='fsaverage5' | requirement=='fslr32k' | requirement=='yeo_parcels') 
-      {
-        stop('VertexWiseR will not be able to analyse cortical data without the parcellation data.\n\n')}
-      else if (requirement=="any") 
-      {
-        warning('VertexWiseR will not be able to analyse cortical data without the parcellation data.\n\n')
-      }
-    }
+#    if ((requirement=="any" | requirement=='fsaverage6' | requirement=='fsaverage5' | requirement=='fslr32k' | requirement=='yeo_parcels')==TRUE 
+#        & !file.exists(paste0(brainstat_data_path,'/brainstat_data/parcellation_data/__MACOSX/')))
+#    {
+#      missingobj=1
+#      
+#      prompt = utils::menu(c("Yes", "No"), title=paste("VertexWiseR could not find BrainStat's yeo parcellation data in", brainstat_data_path, ". They are fetched by default by BrainStat for vertex-wise linear models to run and cannot be ignored. \n Do you want the yeo parcellation data (~1.01 MB) to be downloaded now?"))
+#      
+#      if (prompt==1){    
+#        brainstat.datasets.base=reticulate::import("brainstat.datasets.base", delay_load = TRUE)
+#        try(brainstat.datasets.base$fetch_parcellation(template="fsaverage",atlas="yeo", n_regions=7, data_dir = paste0(brainstat_data_path,'/brainstat_data/parcellation_data/')), 
+#            silent=TRUE)}  
+#      
+#      else if  (requirement=='fsaverage6' | requirement=='fsaverage5' | requirement=='fslr32k' | requirement=='yeo_parcels') 
+#      {
+#        stop('VertexWiseR will not be able to analyse cortical data without the parcellation data.\n\n')}
+#      else if (requirement=="any") 
+#      {
+#        warning('VertexWiseR will not be able to analyse cortical data without the parcellation data.\n\n')
+#      }
+#    }
 } 
     
     #####################################################################
@@ -615,17 +615,17 @@ if (requirement!="python/conda only" & requirement!='conda/brainstat')
     } 
     
     #yeo parcels missing
-    if ((requirement=="any" | requirement=='fsaverage6' | requirement=='fsaverage5' | requirement=='yeo_parcels')==TRUE 
-        & !file.exists(paste0(brainstat_data_path,
-                              '/brainstat_data/parcellation_data/__MACOSX/'))) 
-    {
-      missingobj=paste0("VertexWiseR could not find brainstat yeo parcellation data in the ",brainstat_data_path,"/brainstat_data/ directory. They are fetched by default by brainstat for vertex-wise linear models to run and cannot be ignored.\n");
-      
-      if (interactive()==FALSE)
-      { non_interactive=paste0(missingobj,non_interactive)
-      return(non_interactive)
-      } else {message(missingobj)}
-    } 
+    #if ((requirement=="any" | requirement=='fsaverage6' | requirement=='fsaverage5' | requirement=='yeo_parcels')==TRUE 
+    #    & !file.exists(paste0(brainstat_data_path,
+    #                          '/brainstat_data/parcellation_data/__MACOSX/'))) 
+    #{
+    #  missingobj=paste0("VertexWiseR could not find brainstat yeo parcellation data in the ",brainstat_data_path,"/brainstat_data/ directory. They are fetched by default by brainstat for vertex-wise linear models to run and cannot be ignored.\n");
+    #  
+    #  if (interactive()==FALSE)
+    #  { non_interactive=paste0(missingobj,non_interactive)
+    #  return(non_interactive)
+    #  } else {message(missingobj)}
+    #} 
     
     #neurosynth data missing
     if ((requirement=="any" | requirement=='neurosynth')==TRUE & !file.exists(system.file('extdata','neurosynth_dataset.pkl.gz', package='VertexWiseR'))) 

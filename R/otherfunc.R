@@ -226,12 +226,16 @@ getClusters=function(surf_data,edgelist)
   if(length(edgelist1)>2) #if at least 2 edges are identified
   {
     #extracting cluster-related info from list of non-zero edges
-    com=igraph::components(igraph::graph_from_data_frame(edgelist1, directed = FALSE))
+    #graph_from_data_frame() works a lot faster with character data
+    com=igraph::components(igraph::graph_from_edgelist(edgelist1, directed = FALSE))
     clust.size=com$csize
     
     #cluster mappings
+    clust.idx=which(com$csize>1) # need to remove clusters with only a single vertex
     clust.map=rep(NA,n_vert)
-    clust.map[as.numeric(names(com$membership))]=com$membership
+    clust.map[1:max(edgelist1)]=match(com$membership,clust.idx) #graph_from_edgelist does not return com$membership for each of the n_vert vertices
+  
+    clust.size=clust.size[clust.idx]
   
   } else if(length(edgelist1)==2) #bypass cluster extraction procedure if only 1 edge is identified
   {
@@ -566,7 +570,7 @@ fs6_to_fs5=function(surf_data)
 #'
 #' @description Converts surface data to volumetric data (.nii file)
 #'
-#' @param surf_data A numeric vector or object containing the surface data, either in fsaverage5 (1 x 20484 vertices) or fsaverage6 (1 x 81924 vertices) space. It can only be one row of vertices (not a cohort surface data matrix). 
+#' @param surf_data A numeric vector or object containing the surface data, either in fsaverage5 (1 x 20484 vertices) or fsLR32k (1 x 64984 vertices) space. It can only be one row of vertices (not a cohort surface data matrix). 
 #' @param filename A string object containing the desired name of the output .nii file (default is 'output.nii' in the R temporary directory (tempdir())).
 #' @param VWR_check A boolean object specifying whether to check and validate system requirements. Default is TRUE.
 #'
@@ -598,8 +602,8 @@ surf_to_vol=function(surf_data, filename, VWR_check=TRUE)
   #check length of vector
     n_vert=length(surf_data)
     if(n_vert==20484) {template="fsaverage5"}
-    else if (n_vert==81924) {template="fsaverage6"} 
-    else {stop("Only an surf_data vector with a length of 20484 (fsaverage5) or 81924 (fsaverage6) is accepted")}
+    else if (n_vert==64984) {template="fslr32k"} 
+    else {stop("Only an surf_data vector with a length of 20484 (fsaverage5) or 64984 (fslr32k) is accepted")}
   
   #load python libraries
     interpolate=reticulate::import("brainstat.mesh.interpolate", delay_load = TRUE)
@@ -619,7 +623,7 @@ surf_to_vol=function(surf_data, filename, VWR_check=TRUE)
 #'
 #' @details The \href{https://nimare.readthedocs.io/en/stable/index.html}{'NiMARE'} python module is used for the imaging decoding and is imported via the reticulate package. The function also downloads the \href{https://github.com/neurosynth/neurosynth-data}{'Neurosynth' database} in the package's inst/extdata directory (~8 Mb) for the analysis.
 #'
-#' @param surf_data A numeric vector or object containing the surface data,  in fsaverage5 (1 x 20484 vertices). It can only be one row of vertices (not a cohort surface data matrix). 
+#' @param surf_data A numeric vector or object containing the surface data, in fsaverage5 (1 x 20484 vertices) or fsLR32k (1 x 64984 vertices) space. It can only be one row of vertices (not a cohort surface data matrix). 
 #' @param contrast A string object indicating whether to decode the positive or negative mask ('positive' or 'negative')
 #' @param VWR_check A boolean object specifying whether to check and validate system requirements. Default is TRUE.
 #'
@@ -659,9 +663,9 @@ decode_surf_data=function(surf_data,contrast="positive", VWR_check=TRUE)
   ##checks length
     if(is.vector(surf_data)) {n_vert=length(surf_data)} else {n_vert=ncol(surf_data)}
     if(n_vert==20484) {template="fsaverage5"}
-    else if (n_vert==81924) {stop("decoding of fsaverage6-space image is current not implemented, please resample the image to fsaverage5 space")} 
-    else {stop("Only an surf_data vector with a length of 20484 (fsaverage5) is accepted")}
-
+    else if (n_vert==64984) {template="fslr32k"}
+    else {stop("Only an surf_data vector with a length of 20484 (fsaverage5) or 64984 (fslr32k) is accepted")}
+  
     #check contrast
     if(contrast != "positive" & contrast != "negative")  {stop("contrast has to be either positive or negative")} 
   
