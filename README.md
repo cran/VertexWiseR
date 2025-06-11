@@ -1,11 +1,12 @@
+# VertexWiseR <img src="man/figures/logo.png" align="right" alt="logo" style="float:right; height:200px;"/>
 
-## VertexWiseR: a package for simplified vertex-wise analyses of whole-brain and hippocampal surface in R 
+## A package for simplified vertex-wise analyses of whole-brain and hippocampal surface in R
 <!---start of badges-->
 [![](https://cranlogs.r-pkg.org/badges/grand-total/VertexWiseR)](https://CRAN.R-project.org/package=VertexWiseR)
 [![CRAN status](https://www.r-pkg.org/badges/version/VertexWiseR)](https://cran.r-project.org/package=VertexWiseR)
 <!---end of badges-->
 
-![VertexWise workflow summary](man/figures/Flowchart.jpg)<!-- -->
+![VertexWise workflow summary](man/figures/Flowchart.jpg){alt="Description of the VertexWise workflow summary"}<!-- -->
 
 ### Setting up for the first time
 
@@ -32,7 +33,7 @@ VWRfirstrun()
 
 Note: A pop-up/prompt from reticulate asking 'Would you like to create a default Python environment for the reticulate package?' may appear. Clicking Yes will let reticulate install Python in a virtual environment. This is entirely optional. Simply click No/Cancel to ignore. 
 
-Alternatively, advanced users may specify a pre-installed python environment using reticulate’s [use_python() or use_virtualenv() functions](https://rstudio.github.io/reticulate/reference/use_python.html).  
+Alternatively, advanced users may specify a pre-installed python environment using reticulate’s [use_python() or use_virtualenv() functions](https://rstudio.github.io/reticulate/reference/use_python.html).
 
 #### Loading datasets
 
@@ -193,8 +194,6 @@ maps obtained from an earlier vertex-wise analysis, currently supporting fsavera
 In this example, we will first run a whole-brain vertex-wise
 analysis to compare the cortical thickness between males and females in the young adult population of the SPRENG dataset. The thresholded
 cortical surface maps obtained from this analysis will then be fed into an image-decoding procedure to identify keywords that are relevant to our results
-
-### Source custom-made R functions from Github
 
 The [NiMARE](https://nimare.readthedocs.io/en/stable/index.html) python module is needed in order for the imaging decoding to work. It is similarly imported by VertexWiseR via reticulate in the decode_surf_data() function. 
 

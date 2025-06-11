@@ -1,8 +1,8 @@
-71bd706fa61450d0b792e6615cd5d9bb *DESCRIPTION
+8be1202fede4abd347a7fe5d4d8c82cf *DESCRIPTION
 9cad9e1fcee305f01faf0824295ede39 *NAMESPACE
-3f7e8dc03dba9dceb127f92ef080d510 *NEWS.md
+faefc884e08ea97d827a607691f4845a *NEWS.md
 083310d2148532c7aad7ec2bd174c4d6 *R/CAT12vextract.R
-5b66d6d348830d70d2b5960b5e9e3fd0 *R/FSLRvextract.R
+463274e1e024af840b4bb6c02a76f277 *R/FSLRvextract.R
 05d50d29b885aa4b23c57508da25eb2e *R/HIPvextract.R
 86e180938f1c562b05b879074ba7a4e6 *R/SURFvextract.R
 196d78452e4199eab4192803e21393e2 *R/VWRfirstrun.R
@@ -18,7 +18,7 @@ cff5ba8700b54de756493866115fc6a7 *R/plot_surf3d.R
 5c47bad06a6243b37eb3cca53f91cd44 *R/vertmixedTFCE.R
 5e3a8d1fda75e0e7c0a6746e7303c1b3 *R/vertwise.R
 2dfac9e7866a03ead8d1d7c44b5b0d30 *R/zzz.R
-f7fe9b6e745962e2aee8030455b80e9f *README.md
+ca70987d3f9ed1d7268c8c6b3d4437c3 *README.md
 b943a1546a1e17be4eea235ec7b4616b *build/partial.rdb
 9408a89bf6a1e8e961435f05fdd8ecbc *build/vignette.rds
 259c5541a6e1d3f71671fd8af1b54ce0 *data/MNImap_hip.rdata
@@ -39,7 +39,7 @@ cd9bfe0e6dba4ddb75bedbb27c80e60b *inst/doc/VertexWiseR_Example_1.html
 caa378d1b14670b358fb5670d1f590ee *inst/doc/VertexWiseR_Example_1.html.asis
 a142134b140a3fa339e624cbb9c5c42b *inst/doc/VertexWiseR_Example_2.html
 37e7da75279383e95a1f6cf0216c434b *inst/doc/VertexWiseR_Example_2.html.asis
-6bb497697ce912209563ea897ece53cb *inst/doc/VertexWiseR_surface_extraction.html
+30ff05a365205e45e955c2f8c2df9b4b *inst/doc/VertexWiseR_surface_extraction.html
 9c930212f314d1c9503cce6aeb10795c *inst/doc/VertexWiseR_surface_extraction.html.asis
 eb717d531ea288f9f94f945617c1af5a *inst/extdata/hip_points_cells.pkl
 4ece04083eebe53401a8f557a3ee018a *inst/extdata/hip_template.fs
@@ -47,7 +47,7 @@ cd4b128967c736bddcb4de06d0fe9f02 *inst/python/brainstat.stats.SLM_VWR.py
 9c824accf97e513dcd29d121d4dd4a0c *inst/python/hipp_plot.py
 58fe697e8dff483d889e83da8793476f *inst/python/smooth.py
 1ba69e6d62e1297c9c7998e3411d3237 *man/CAT12vextract.Rd
-f0e49ea6279565c1f9429bda1f53d57e *man/FSLRvextract.Rd
+4a1fd9ca868d811ba7d6d41e6d3b8f81 *man/FSLRvextract.Rd
 209a198347f1201d45588a498d67134c *man/HIPvextract.Rd
 370f99d7ddcb384f3e26f073a6c63822 *man/MNImap_hip.Rd
 8243f841bd1da97fb3a00ca1bd602174 *man/MNIsurface-class.Rd
@@ -66,7 +66,7 @@ e84c8ed8d1fca192e3e2c2ac57aabd59 *man/atlas_to_surf.Rd
 cdcdc1442033326dfdcecef460b9f37f *man/decode_surf_data.Rd
 0a841f36a0e154212f68e585930aec19 *man/edgelist-class.Rd
 8670934d763219f7aa5240dd46d114cd *man/edgelist_hip.Rd
-f4515e3ef62216d7060c49e8f74d3f76 *man/figures/Flowchart.jpg
+78c2a962a0850e3a5d2bc38daaf6d794 *man/figures/Flowchart.JPG
 67180e194e62e543e053b46988f2caa5 *man/figures/sexdiff.png
 1f64e6c8a79fce81f3b99872dc33105d *man/figures/sigcluster.png
 0784d25ec8c6b070324a19a76bf7e2f7 *man/figures/wordcloud.jpg
@@ -83,7 +83,7 @@ d90e2d43cbb8709ca8f6577d7444d8c8 *man/smooth_surf.Rd
 3f44a73fbf968ead319b0ce308c08526 *vignettes/FINK_tstatmaps.png
 aea293357c1a9185ab0cd016dcc65cef *vignettes/Python_troubleshooting.Rmd
 485a25a70bdf95776ec5c99ce9e95bd2 *vignettes/Python_troubleshooting.html.asis
-db9b42bd73fc5c8f5b33b91e98005426 *vignettes/SPRENG_tstatmaps.png
+7ab3890ddde9a97ead66e0f7af6be76b *vignettes/SPRENG_tstatmaps.png
 38e35a0fb52930bbf8a8b7c5aa851c95 *vignettes/VertexWiseR_Example_1.Rmd
 caa378d1b14670b358fb5670d1f590ee *vignettes/VertexWiseR_Example_1.html.asis
 4b08c04d27ad4c93d3fd9a13bf82f1c0 *vignettes/VertexWiseR_Example_2.Rmd
@@ -91,5 +91,5 @@ caa378d1b14670b358fb5670d1f590ee *vignettes/VertexWiseR_Example_1.html.asis
 a22edd577e5c13c5e20593b15c720a41 *vignettes/VertexWiseR_surface_extraction.Rmd
 9c930212f314d1c9503cce6aeb10795c *vignettes/VertexWiseR_surface_extraction.html.asis
 7e756b09c848feaec9c567c57cf0fe24 *vignettes/references.bib
-eb1318a75cd039a296ea8d240776ea87 *vignettes/surfextract.jpg
+608849b621c9c2f624fbb0835a726d2b *vignettes/surfextract.jpg
 4c72bc41b22a4db387cc18d3e1bf6c81 *vignettes/traj.png
