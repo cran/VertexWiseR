@@ -15,12 +15,14 @@ plot_surf(
   size,
   zoom,
   transparent_bg = FALSE,
+  show_nan = T,
+  alpha = 1,
   show.plot.window = TRUE,
   VWR_check = TRUE
 )
 }
 \arguments{
-\item{surf_data}{A numeric vector (length of V) or a matrix (N rows x V columns), where N is the number of subplots, and V is the number of vertices. It can be the output from SURFvextract(), FSLRvextract(), HIPvextract() as well as masks or vertex-wise results outputted by analyses functions. Alternatively, atlas ROI values as supported by atlas_to_surf() may be given.}
+\item{surf_data}{A numeric vector (length of V) or a matrix (N rows x V columns), where N is the number of subplots, and V is the number of vertices. It can be the output from SURFvextract(), CAT12vextract(), FSLRvextract(), HIPvextract() as well as masks or vertex-wise results outputted by analyses functions. Alternatively, atlas ROI values as supported by atlas_to_surf() may be given.}
 
 \item{filename}{A string object containing the desired name of the output .png. Default is 'plot.png' in the R temporary directory (tempdir()).Only filenames with a .png extension are allowed.}
 
@@ -41,6 +43,10 @@ Default cmap is set to \code{"Reds"} for positive values, \code{"Blues_r"} for n
 \item{zoom}{A numeric value for adjusting the level of zoom on the figures. Default is 1.25 for whole-brain surface and 1.20 for hippocampal surface.}
 
 \item{transparent_bg}{A logical object to determine if the background of the image is set to transparent (Default is FALSE).}
+
+\item{show_nan}{A logical object to determine if the NaN vertices are to be plotted (Default is TRUE).}
+
+\item{alpha}{A numeric object between 0 and 1 to determine the opacity of the non-empty vertices. Note that this is not a true opacity setting, it will blend the colour into that of the NaN vertices (white if show_nan is FALSE)}
 
 \item{show.plot.window}{A logical object to determine if the generated plot is to be shown within RStudio's plot window}
 

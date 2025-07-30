@@ -1,3 +1,17 @@
+# VertexWiseR v1.4.0
+
+## NEW FEATURES
+* New function getting_started(): allows users to run through the package's tutorials and to download all the demo data at once. Article vignettes now propose downloading the demo data in bulk rather than running the line every time.
+* New function plot_overlay_surf(): allows users to plot two surfaces on top of each other, with varying opacity, color maps and value ranges (for cortical surfaces). A new tutorial/vignette called 'Overlaying plots and transparent thresholding' was also created to showcase it.
+* New function DTSERIESvextract(): allows users to extract vertex-wise surface-based CIFTI dense time-series data from an individual dtseries .nii file from HCP, fMRIprep or XCP-D preprocessed directories.
+* New options for plot_surf: alpha setting to reduce transparency of non-NaN vertices, and option to not plot the NaN vertices.
+
+## FIXES
+* When VWRfirstrun() was set to promptless, it checked the wrong directory path for brainstat's fslr32k data and considered it missing.
+* Successful check message stopped showing except when promptless was set as FALSE, this was a mistake.
+* Fix to ensure the right numpy version gets installed when installing miniconda, in case brainstat does not upon installation
+* Fix to still run UV if RETICULATE_PYTHON was set to NA (a suggestion given in our article for users whose systems already have a python installed but want to dedicate VWR to a virtual environment)
+
 # VertexWiseR v1.3.2
 
 ## FIXES
