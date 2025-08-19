@@ -4,16 +4,16 @@
 \alias{DTSERIESvextract}
 \title{DTSERIESvextract}
 \usage{
-DTSERIESvextract(dtseries, wb_path, filename, silent = FALSE)
+DTSERIESvextract(dtseries, filename, silent = FALSE, VWR_check = TRUE)
 }
 \arguments{
 \item{dtseries}{A string object containing the full path to the dtseries files to extract from.}
 
-\item{wb_path}{The filepath to the workbench folder that you have previously downloaded and unzipped}
-
 \item{filename}{A string object containing the desired name of the output RDS file. Default is 'fslr32k.rds' in the R temporary directory (tempdir()).}
 
 \item{silent}{A logical object to determine whether messages will be silenced. Set to 'FALSE' by default}
+
+\item{VWR_check}{A boolean object specifying whether to check and validate system requirements. Default is TRUE.}
 }
 \value{
 A .RDSfile containing a surface data matrix object, with N time-point x M vertices dimensions and can be readily used by VertexWiseR statistical analysis functions. Each row corresponds to a time point in order and contains the left to right hemispheres' vertex-wise values.
@@ -38,9 +38,8 @@ mode = "wb")
 sub_dtseries=DTSERIESvextract(
 dtseries=paste0(tempdir(),
              "/demo_91k_bold.dtseries.nii"), 
-wb_path="/path/to/workbench",
-filename="demo_91k_bold.dtseries.rds", 
-silent=FALSE)
+silent=FALSE,
+VWR_check=FALSE)
 
 ##visualizing e.g. the first 4 frames of the fMRI volume
 #plot_surf(sub_dtseries[c(1,10,20,40),], 

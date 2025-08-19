@@ -6,17 +6,15 @@
 \usage{
 FSLRvextract(
   sdirpath = "./",
-  wb_path,
   filename,
   dscalar,
   subj_ID = TRUE,
-  silent = FALSE
+  silent = FALSE,
+  VWR_check = TRUE
 )
 }
 \arguments{
 \item{sdirpath}{A string object containing the path to the HCP or fMRIprep preprocessed directory. Default is the current working directory ("./").}
-
-\item{wb_path}{The filepath to the workbench folder that you have previously downloaded and unzipped}
 
 \item{filename}{A string object containing the desired name of the output RDS file. Default is 'fslr32k.rds' in the R temporary directory (tempdir()).}
 
@@ -33,6 +31,8 @@ FSLRvextract(
 \item{subj_ID}{A logical object to determine whether to return a list object containing both subject ID and data matrix.}
 
 \item{silent}{A logical object to determine whether messages will be silenced. Set to 'FALSE' by default}
+
+\item{VWR_check}{A boolean object specifying whether to check and validate system requirements. Default is TRUE.}
 }
 \value{
 A .RDSfile with a list containing 1. the list of subject IDs (first element) and 2. a surface data matrix object (second element), or only a data matrix object. The matrix has N subjects x M vertices dimensions and can be readily used by VertexWiseR statistical analysis functions. Each row corresponds to a subject (in the order they are listed in the folder) and contains the left to right hemispheres' vertex-wise values.
@@ -45,9 +45,9 @@ The function searches for the HCP preprocessed directory by listing out files wi
 }
 \examples{
 dat_fslr32k=FSLRvextract(sdirpath="./", 
-wb_path="/path/to/workbench",
 filename="dat_fslr32k.rds",
 dscalar=".thickness_MSMAll.32k_fs_LR.dscalar.nii", 
-subj_ID = TRUE, silent=FALSE)
-
+subj_ID = TRUE, 
+silent=FALSE,
+VWR_check=FALSE)
 }
