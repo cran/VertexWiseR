@@ -93,7 +93,7 @@ VWRfirstrun=function(requirement="any", n_vert=0, promptless=FALSE)
           
           #check if virtual environment available with the right settings and initialize it.
           message('Installing Python ephemeral environment via reticulate\'s py_require() and UV...\n')
-          reticulate::py_require(packages=c("numpy<=1.26.4","matplotlib","brainstat==0.4.2","vtk==9.3.1"), python_version = "<3.11")
+          reticulate::py_require(packages=c("numpy<=1.26.4","matplotlib","brainstat==0.4.2","vtk==9.3.1", "nilearn==0.11.1"), python_version = "<3.11")
           reticulate::py_config()
           
           #will store cache path in .Renviron in tools::R_user_dir() 
@@ -586,8 +586,6 @@ if (requirement!="python/conda only" & requirement!='conda/brainstat')
       brainstat_data_path=Sys.getenv('BRAINSTAT_DATA')
     }
     
-    
-    
     #fsaverage5 missing
     if ((requirement=="any" | requirement=='fsaverage5')==TRUE & !file.exists(paste0(brainstat_data_path,'/brainstat_data/surface_data/tpl-fsaverage/fsaverage5'))) 
     {
@@ -621,19 +619,6 @@ if (requirement!="python/conda only" & requirement!='conda/brainstat')
       return(non_interactive)
       } else {message(missingobj)}
     } 
-    
-    #yeo parcels missing
-    #if ((requirement=="any" | requirement=='fsaverage6' | requirement=='fsaverage5' | requirement=='yeo_parcels')==TRUE 
-    #    & !file.exists(paste0(brainstat_data_path,
-    #                          '/brainstat_data/parcellation_data/__MACOSX/'))) 
-    #{
-    #  missingobj=paste0("VertexWiseR could not find brainstat yeo parcellation data in the ",brainstat_data_path,"/brainstat_data/ directory. They are fetched by default by brainstat for vertex-wise linear models to run and cannot be ignored.\n");
-    #  
-    #  if (interactive()==FALSE)
-    #  { non_interactive=paste0(missingobj,non_interactive)
-    #  return(non_interactive)
-    #  } else {message(missingobj)}
-    #} 
     
     #neurosynth data missing
     if ((requirement=="any" | requirement=='neurosynth')==TRUE & !file.exists(system.file('extdata','neurosynth_dataset.pkl.gz', package='VertexWiseR'))) 

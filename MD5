@@ -1,6 +1,6 @@
-42379c9f69db56dc8367899fd9b57e1d *DESCRIPTION
+b031417dae01efdc5c3e128a17ee0ba1 *DESCRIPTION
 11312576eb8109a533b158c88f94d673 *NAMESPACE
-724d9c83e310ec8b976f61a5cbc80380 *NEWS.md
+acd0fb61261bfc5f4d8df695c20d1cf8 *NEWS.md
 e331a7af23f190e7044b78357d84f959 *R/CAT12vextract.R
 140400ef3318c13894d11a8017985311 *R/DTSERIESvextract.R
 5fb18689f1619711e4a446f96dcf1898 *R/FSLRvextract.R
@@ -9,7 +9,7 @@ a239f30c4fdac3e388c7a95d40b31448 *R/RFT_vertex_analysis.R
 86e180938f1c562b05b879074ba7a4e6 *R/SURFvextract.R
 10f8753c524744f687c7ecdac264d935 *R/TFCE_vertex_analysis.R
 5c47bad06a6243b37eb3cca53f91cd44 *R/TFCE_vertex_analysis_mixed.R
-47d4e64f0f6ecf1de6b38cbba1dea2ca *R/VWRfirstrun.R
+a0e50550d558cab8a953e7cd95459bd4 *R/VWRfirstrun.R
 2c38c92e972afc2e9d1abf3a887ef785 *R/classes.r
 b1350f585bce82bc0aab072ee12f165f *R/conversion_functions.R
 91d279e8d74abc936de6bf903f3b16aa *R/data.R
