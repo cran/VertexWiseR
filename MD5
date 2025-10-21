@@ -1,6 +1,6 @@
-b031417dae01efdc5c3e128a17ee0ba1 *DESCRIPTION
+0cd5bee0ba87eff52e66238fc64c5c51 *DESCRIPTION
 11312576eb8109a533b158c88f94d673 *NAMESPACE
-acd0fb61261bfc5f4d8df695c20d1cf8 *NEWS.md
+169a99a4c8dfb93352cf646916bd3ab3 *NEWS.md
 e331a7af23f190e7044b78357d84f959 *R/CAT12vextract.R
 140400ef3318c13894d11a8017985311 *R/DTSERIESvextract.R
 5fb18689f1619711e4a446f96dcf1898 *R/FSLRvextract.R
@@ -9,7 +9,7 @@ a239f30c4fdac3e388c7a95d40b31448 *R/RFT_vertex_analysis.R
 86e180938f1c562b05b879074ba7a4e6 *R/SURFvextract.R
 10f8753c524744f687c7ecdac264d935 *R/TFCE_vertex_analysis.R
 5c47bad06a6243b37eb3cca53f91cd44 *R/TFCE_vertex_analysis_mixed.R
-a0e50550d558cab8a953e7cd95459bd4 *R/VWRfirstrun.R
+b56027998febc2a55daea548e344ed3e *R/VWRfirstrun.R
 2c38c92e972afc2e9d1abf3a887ef785 *R/classes.r
 b1350f585bce82bc0aab072ee12f165f *R/conversion_functions.R
 91d279e8d74abc936de6bf903f3b16aa *R/data.R
@@ -45,7 +45,7 @@ cf3a4ea2acbe0048fb7f72a786491cb0 *data/edgelist_hip.rdata
 caa378d1b14670b358fb5670d1f590ee *inst/doc/VertexWiseR_Example_1.html.asis
 60c62a8ca4c9187e15ae476b16a75065 *inst/doc/VertexWiseR_Example_2.html
 37e7da75279383e95a1f6cf0216c434b *inst/doc/VertexWiseR_Example_2.html.asis
-cf4a6a843144de5fda82bf0e9b5f0db6 *inst/doc/VertexWiseR_surface_extraction.html
+068f99224e1d11c463afb55916d05b48 *inst/doc/VertexWiseR_surface_extraction.html
 9c930212f314d1c9503cce6aeb10795c *inst/doc/VertexWiseR_surface_extraction.html.asis
 eb717d531ea288f9f94f945617c1af5a *inst/extdata/hip_points_cells.pkl
 4ece04083eebe53401a8f557a3ee018a *inst/extdata/hip_template.fs
@@ -99,7 +99,7 @@ eb31e5d3ac5ec2c284d96b35a9659799 *vignettes/VertexWiseR_Example_2.Rmd
 8d5266c745dbd0e600d5600f8b51f27b *vignettes/VertexWiseR_plot_overlay.Rmd
 c0b5cb9e57381448e473556e472c6112 *vignettes/VertexWiseR_plot_overlay.asis
 efada411aca3af2b31bdac4f52071fa9 *vignettes/VertexWiseR_plot_overlay.html
-36e0868872507bc3d090cb4e205b64f1 *vignettes/VertexWiseR_surface_extraction.Rmd
+00a167b4da71d416e4931d49489bb3c0 *vignettes/VertexWiseR_surface_extraction.Rmd
 9c930212f314d1c9503cce6aeb10795c *vignettes/VertexWiseR_surface_extraction.html.asis
 85765da9fff23d2797fe5416578e1e65 *vignettes/references.bib
 608849b621c9c2f624fbb0835a726d2b *vignettes/surfextract.jpg
