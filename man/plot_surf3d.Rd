@@ -13,7 +13,9 @@ plot_surf3d(
   hemi = "b",
   medial_gap = 0,
   orientation_labels = TRUE,
-  VWR_check = TRUE
+  VWR_check = TRUE,
+  plot_grid = TRUE,
+  transparent_bg = FALSE
 )
 }
 \arguments{
@@ -21,7 +23,7 @@ plot_surf3d(
 
 \item{surf_color}{color of the cortical surface. Set to \code{'grey'} by default}
 
-\item{cmap}{A string vector containing 2 to 4 color names/codes specifying the colors to be used for the color scale. See \code{RColorBrewer::display.brewer.all()} for all possible cmap options. If none are specified, appropriate colors will be automatically selected according to \code{range(surf_data)}}
+\item{cmap}{A string vector containing 2 to 4 color names/codes specifying the colors to be used for the color scale; or a single string object with the name of a color map listed in \code{RColorBrewer::display.brewer.all()}. If none are specified, appropriate colors will be automatically selected according to \code{range(surf_data)}}
 
 \item{limits}{A combined pair of numeric vector composed of the lower and upper color scale limits of the plot. When left unspecified, the symmetrical limits \verb{c(-max(abs(surf_dat),max(abs(surf_dat)))} will be used.}
 
@@ -34,6 +36,10 @@ plot_surf3d(
 \item{orientation_labels}{A boolean object specifying if orientation labels are to be displayed. Set to \code{TRUE} by default}
 
 \item{VWR_check}{A boolean object specifying whether to check and validate system requirements. Default is TRUE.}
+
+\item{plot_grid}{A boolean object specifying whether to plot the orientation grid or not (default is \code{TRUE}).}
+
+\item{transparent_bg}{A boolean object specifying whether to get a transparent background upon saving the image (default is \code{FALSE}, white background).}
 }
 \value{
 a plot_ly object

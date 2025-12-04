@@ -56,7 +56,19 @@ plot_surf=function(surf_data, filename, title="",surface="inflated",cmap,limits,
     title=list('left'=list(title))
     rows=1
     surf_data=as.numeric(surf_data)
-  } else {rows=nrow(surf_data)}
+  } else 
+  {
+    if(nrow(surf_data)==1)
+    {
+      title=list('left'=list(title))
+      rows=1
+      surf_data=as.numeric(surf_data)
+    }
+    else 
+    {
+    rows=nrow(surf_data)
+    }
+  }
   
   #in a multi-row data scenario: insert a dummy title if title is missing  or repeat the title nrow times
   if(rows>1) 
@@ -165,8 +177,7 @@ plot_surf=function(surf_data, filename, title="",surface="inflated",cmap,limits,
     ##cortical surface fplots
     #import python libraries
     brainstat.datasets=reticulate::import("brainstat.datasets", delay_load = TRUE)  
-    brainspace.plotting=reticulate::import("brainspace.plotting", delay_load = TRUE)  
-    
+    brainspace.plotting=reticulate::import("brainspace.plotting", delay_load = TRUE)
     
     #For brainstat data, it will look either in default $HOME path or 
     #custom if it's been set
@@ -229,9 +240,14 @@ plot_surf=function(surf_data, filename, title="",surface="inflated",cmap,limits,
     if(is.null(nrow(surf_data)))  {surf_data=cbind(surf_data[1:7262],surf_data[7263:14524])} #if N=1
     else  
     {
+      if(nrow(surf_data)==1)
+      {surf_data=cbind(surf_data[1:7262],surf_data[7263:14524])} 
+      else
+      {
       surf_data.3d=array(NA,c(7262,2,nrow(surf_data))) #if N>1
       for (row in 1:nrow(surf_data))  {surf_data.3d[,,row]=cbind(surf_data[row,1:7262],surf_data[row,7263:14524])}
       surf_data=surf_data.3d
+      }
     }
     
     surf_plot=surfplot_canonical_foldunfold(

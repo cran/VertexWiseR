@@ -112,11 +112,19 @@ extract.t=function(mod,row)
   Qr = mod$qr
   p1 = 1L:p
   r = mod$residuals
-  rss = colSums(r^2)
-  resvar = rss/rdf
   R = chol2inv(Qr[p1, p1, drop = FALSE])  
-  se = (sqrt(diag(R) %*% t(resvar)))[row,]
-  est = mod$coefficients[row,]
+  if(is.matrix(mod$coefficients))
+  {
+    rss = colSums(r^2)
+    resvar = rss/rdf 
+    se = (sqrt(diag(R) %*% t(resvar)))[row,]
+    est = mod$coefficients[row,]
+  } else {
+    rss = sum(r^2)
+    resvar = rss/rdf
+    se = (sqrt(diag(R) * resvar))[row]
+    est = mod$coefficients[row]
+  }
   tval = est/se 
   return(tval)
 }
@@ -313,7 +321,7 @@ model_check=function(contrast, model, random, surf_data, smooth_FWHM)
   {
     for (column in 1:NCOL(model))
     {
-      if(inherits(model[,column],"character")==TRUE)
+      if(inherits(model[,column],"character")==TRUE | inherits(model[,column],"factor")==TRUE)
       {
         if(length(unique(model[,column]))==2)
         {
@@ -328,7 +336,7 @@ model_check=function(contrast, model, random, surf_data, smooth_FWHM)
     }
   } else
   {
-    if(inherits(model,"character")==TRUE) 
+    if(inherits(model,"character")==TRUE | inherits(model[,column],"factor")==TRUE) 
     {
       if(length(unique(model))==2)
       {
