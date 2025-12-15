@@ -1,8 +1,8 @@
 Package: VertexWiseR
 Title: Simplified Vertex-Wise Analyses of Whole-Brain and Hippocampal
         Surface
-Version: 1.4.4
-Date: 2025-12-03
+Version: 1.4.5
+Date: 2025-12-15
 Authors@R: c(
     person("Junhong", "Yu", , "junhong.yu@ntu.edu.sg", role = "aut",
            comment = c(ORCID = "0000-0002-2563-9658")),
@@ -34,9 +34,9 @@ Imports: doParallel, doSNOW, foreach, freesurferformats, fs, gifti,
         rappdirs, RColorBrewer, reticulate, stats, stringr, tools,
         utils
 NeedsCompilation: no
-Packaged: 2025-12-03 02:05:22 UTC; charly.billaud
+Packaged: 2025-12-15 04:21:33 UTC; charly.billaud
 Author: Junhong Yu [aut] (ORCID: <https://orcid.org/0000-0002-2563-9658>),
   Charly Billaud [aut, cre] (ORCID:
     <https://orcid.org/0009-0001-3466-9963>)
 Repository: CRAN
-Date/Publication: 2025-12-04 01:10:02 UTC
+Date/Publication: 2025-12-15 05:20:02 UTC

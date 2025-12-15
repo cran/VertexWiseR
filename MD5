@@ -1,6 +1,6 @@
-829a0b069b4cebfc298b7058f0d2ce95 *DESCRIPTION
+b77ca855cd5261be97c70244538581b1 *DESCRIPTION
 1d93bf754cad4675ad7280e60ae027a9 *NAMESPACE
-fa0721dee2b0b2ed16d024ee477bbe7e *NEWS.md
+b7680986498b0eb5fb02a7a669291c33 *NEWS.md
 e331a7af23f190e7044b78357d84f959 *R/CAT12vextract.R
 140400ef3318c13894d11a8017985311 *R/DTSERIESvextract.R
 5fb18689f1619711e4a446f96dcf1898 *R/FSLRvextract.R
@@ -17,8 +17,8 @@ bf739a08613006b7f85facae6520a647 *R/decode_surf_data.R
 8c11696bb6db0e6df1bf27eb55c274e8 *R/fs_stats.R
 1872162440175db77e20a4da6d681b7e *R/getting_started.r
 c87af609f12b2a86d77d984f7401cb29 *R/miniconda_installer_url_py39.r
-117e662c9375033d10499927ebb08640 *R/model_formula_reader.R
-abe593415f1ab0a9e94d062fec7992db *R/other_functions.R
+c14b918e18f52a1c579e72d452c4c306 *R/model_formula_reader.R
+06d535d6cddd2f090376f23a23e48e01 *R/other_functions.R
 27fb6fb639cd80404e4f05f38fc0c1af *R/plot_overlay_surf.r
 00e0c19f60f00181961e107c409db9ef *R/plot_surf.R
 cbed251584940ca3e372d40df4893920 *R/plot_surf3d.R
