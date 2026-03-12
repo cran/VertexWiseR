@@ -24,6 +24,7 @@ plot_overlay_surf(
   size,
   zoom,
   transparent_bg = FALSE,
+  smooth_mesh = 0,
   show.plot.window = TRUE,
   VWR_check = TRUE
 )
@@ -31,7 +32,7 @@ plot_overlay_surf(
 \arguments{
 \item{model_output}{A list object outputted by RFT_vertex_analysis() or TFCE_threshold(). The 'tstat_map' will automatically be treated as background map, and the 'thresholded_tstat_map' as overlay map. See surf_data_1 or surf_data_2 to assign any map manually.}
 
-\item{surf_data_1}{A numeric vector (length of V), where V is the number of vertices. It can be one row from the output from SURFvextract(), CAT12vextract(), FSLRvextract(), as well as masks or vertex-wise results outputted by analyses functions. This is the background surface.}
+\item{surf_data_1}{A numeric vector (length of V), where V is the number of vertices. It can be one row from the output from SURFvextract(), CAT12vextract(), FSLRvextract(), HIPvextract(), ASEGvextract(), as well as masks or vertex-wise results outputted by analyses functions. This is the background surface.}
 
 \item{surf_data_2}{Same as surf_data_1. This is the overlay surface.}
 
@@ -55,7 +56,7 @@ Default cmap is set to \code{"Reds"} for positive values, \code{"Blues_r"} for n
 
 \item{show_nan}{A logical object to determine if the NaN vertices are to be plotted (Default is TRUE). This is meant for the background surface. The overlay surface will always omit NaN vertices to make the background visible.}
 
-\item{filename}{A string object containing the desired name of the output .png. Default is 'combined_plots.png' in the R temporary directory (tempdir()).Only filenames with a .png extension are allowed.}
+\item{filename}{A string object containing the desired name of the output .png. Default is 'combined_plots.png' in the R temporary directory (tempdir()). Only filenames with a .png extension are allowed.}
 
 \item{title}{A string object for setting the title in the plot. Default is none. For titles that too long to be fully displayed within the plot, we recommend splitting them into multiple lines by inserting "\\n".}
 
@@ -63,11 +64,13 @@ Default cmap is set to \code{"Reds"} for positive values, \code{"Blues_r"} for n
 
 \item{overlay_boundaries}{A logical object stating whether to plot black contour of the overlay layer.}
 
-\item{size}{A combined pair of numeric vector indicating the image dimensions (width and height in pixels). Default is c(1700,400). Note that the size will depend on the inclusion of color bar(s), which will expand the width to ~5\% per color bar.}
+\item{size}{A combined pair of numeric vector indicating the image dimensions (width and height in pixels). Default is c(1700,400) for cortical surfaces and c(860,200) for Hippunfold hippocampal surfaces. Note that the size will depend on the inclusion of color bar(s), which will expand the width to ~5\% per color bar.}
 
-\item{zoom}{A numeric value for adjusting the level of zoom on the figures. Default is 1.25.}
+\item{zoom}{A numeric value for adjusting the level of zoom on the figures. Default is 1.25 for cortical surfaces and 1.2 for Hippunfold hippocampal surfaces.}
 
 \item{transparent_bg}{A logical object to determine if the background of the image is set to transparent (Default is FALSE).}
+
+\item{smooth_mesh}{A numeric object stating the number of iterations of smoothing to make the surface appear smoother. Default is 0.}
 
 \item{show.plot.window}{A logical object to determine if the generated plot is to be shown within RStudio's plot window}
 
@@ -101,7 +104,7 @@ plot_overlay_surf(surf_data_1=background,
                 cmap_1='RdBu_r', cmap_2='Reds',
                 alpha_1=0.4, alpha_2=1,
                 filename=paste0(tempdir(),"/simulated_plot.png"), 
-               title="Significant effects",
-               overlay_boundaries=TRUE,
-               VWR_check=FALSE)
+                title="Significant effects",
+                overlay_boundaries=TRUE,
+                VWR_check=FALSE)
 }

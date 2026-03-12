@@ -21,7 +21,7 @@
 #' @return No returned value in interactive session. In non-interactive sessions, a string object informing that system requirements are missing.
 #' @examples
 #' VWRfirstrun()
-#' @importFrom reticulate conda_binary py_module_available miniconda_path py_require use_miniconda
+#' @importFrom reticulate conda_binary py_module_available miniconda_path py_require use_miniconda import
 #' @importFrom fs path_home
 #' @importFrom methods is 
 #' @importFrom utils menu
@@ -512,14 +512,12 @@ if (requirement!="python/conda only" & requirement!='conda/brainstat')
     #####################################################################
     #Check if neurosynth database is present and download
     if ((requirement=="any" | requirement=='neurosynth')==TRUE 
-        & !file.exists(system.file('extdata','neurosynth_dataset.pkl.gz', package='VertexWiseR')))
+        & !file.exists(paste0(system.file('extdata',package='VertexWiseR'),'/neurosynth_dataset.pkl.gz')))
     {
       missingobj=1
       
       prompt = utils::menu(c("Yes", "No"), title=paste0(
-        "\nneurosynth_dataset.pkl is not detected inside VertexWiseR's installed package directory (", 
-        system.file('extdata','neurosynth_dataset.pkl.gz', package='VertexWiseR'), 
-        "). It is needed to be able to run decode_surf_data(). It can be downloaded from the github VertexWiseR directory.\n\nDo you want the neurosynth database (7.5 MB) to be downloaded now?"))
+        "\nneurosynth_dataset.pkl.gz is not detected inside VertexWiseR's installed package directory (", paste0(system.file('extdata',package='VertexWiseR'),'/neurosynth_dataset.pkl.gz'), "). It is needed to be able to run decode_surf_data(). It can be downloaded from the github VertexWiseR directory.\n\nDo you want the neurosynth database (7.5 MB) to be downloaded now?"))
       if (prompt==1) {
         
         #function to check if url exists
@@ -534,7 +532,7 @@ if (requirement!="python/conda only" & requirement!='conda/brainstat')
         #Check if URL works and avoid returning error but only print message as requested by CRAN:
         url="https://raw.githubusercontent.com/CogBrainHealthLab/VertexWiseR/main/inst/extdata/neurosynth_dataset.pkl.gz"
         if(valid_url(url)) {
-          download.file(url="https://raw.githubusercontent.com/CogBrainHealthLab/VertexWiseR/main/inst/extdata/neurosynth_dataset.pkl.gz",destfile = paste0(system.file(package='VertexWiseR'),'/extdata/neurosynth_dataset.pkl.gz'))
+          download.file(url=url,destfile = paste0(system.file(package='VertexWiseR'),'/extdata/neurosynth_dataset.pkl.gz'))
         } else { 
           warning("The neurosynth database (neurosynth_dataset.pkl.gz) failed to be downloaded from the github VertexWiseR directory. Please check your internet connection. Alternatively, you may visit https://github.com/CogBrainHealthLab/VertexWiseR/tree/main/inst/extdata and download the object manually.") #ends function
         } 
@@ -644,9 +642,9 @@ if (requirement!="python/conda only" & requirement!='conda/brainstat')
     } 
     
     #neurosynth data missing
-    if ((requirement=="any" | requirement=='neurosynth')==TRUE & !file.exists(system.file('extdata','neurosynth_dataset.pkl.gz', package='VertexWiseR'))) 
+    if ((requirement=="any" | requirement=='neurosynth')==TRUE & !file.exists(paste0(system.file('extdata',package='VertexWiseR'),'/neurosynth_dataset.pkl.gz'))) 
     {
-      missingobj=paste0("neurosynth_dataset.pkl is not detected inside VertexWiseR's installed package directory (", system.file('extdata','neurosynth_dataset.pkl.gz', package='VertexWiseR'), "). It is needed to be able to run decode_surf_data().\n");
+      missingobj=paste0("neurosynth_dataset.pkl.gz is not detected inside VertexWiseR's installed package directory (", paste0(system.file('extdata',package='VertexWiseR'),'/neurosynth_dataset.pkl.gz'), "). It is needed to be able to run decode_surf_data().\n");
       
       if (interactive()==FALSE)
       { non_interactive=paste0(missingobj,non_interactive)

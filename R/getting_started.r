@@ -14,10 +14,10 @@ if (interactive()==TRUE) #only works in interactive session
 {
   cat("Welcome to VertexWiseR's demo!\n")
   
-  if (demo_data==TRUE)
+  if (demo_data==TRUE & !dir.exists(paste0(tempdir(),'/demo_data')) )
   {
-   prompt = utils::menu(title="Before starting, you may want to download the demo_data folder (~218 MB) used by the various tutorials. Would you like to download it now?",
-     choices = c(paste0("Yes, in a temporary R directory (default path is tempdir())"),
+   prompt = utils::menu(title="Before starting, you may want to download the demo_data folder (~216 MB) used by the various tutorials. Would you like to download it now?",
+     choices = c(paste0("Yes, in a temporary R directory (default path is tempdir(): ", tempdir(), ")"),
                  paste0("Yes, in the current working directory (",getwd(),")"),
                  "Yes, let me type a path where it will go", 
                  "No"), 
@@ -34,11 +34,19 @@ if (interactive()==TRUE) #only works in interactive session
   }
 
   prompt_2 = utils::menu(title="\nAvailable tutorials (will open in Rstudio's Help panel):",
-            choices = c("Extracting surface data in VertexWiseR", "Example analyses with VertexWiseR - Example 1", "Example analyses with VertexWiseR - Example 2"))
-  if (prompt_2==1) { vignette(package='VertexWiseR', topic='VertexWiseR_surface_extraction')}
-  else if (prompt_2==2) { vignette(package='VertexWiseR', topic='VertexWiseR_Example_1')}
-  else if (prompt_2==3) { vignette(package='VertexWiseR', topic='VertexWiseR_Example_2')}
-
+            choices = c("Extracting surface data in VertexWiseR", 
+                        "Example analyses with VertexWiseR - Example 1",
+                        "Example analyses with VertexWiseR - Example 2",
+                        "Example analyses with VertexWiseR - Example 3",
+                        "Overlaying plots and transparent thresholding",
+                        "Python troubleshooting"
+                        ))
+  if (prompt_2==1) { utils::vignette(package='VertexWiseR', topic='VertexWiseR_surface_extraction')}
+  else if (prompt_2==2) { utils::vignette(package='VertexWiseR', topic='VertexWiseR_Example_1')}
+  else if (prompt_2==3) { utils::vignette(package='VertexWiseR', topic='VertexWiseR_Example_2')}
+  else if (prompt_2==4) { utils::vignette(package='VertexWiseR', topic='VertexWiseR_Example_3')}
+  else if (prompt_2==5) { utils::vignette(package='VertexWiseR', topic='VertexWiseR_plot_overlay')}
+  else if (prompt_2==6) { utils::vignette(package='VertexWiseR', topic='Python_troubleshooting')}
 }
 }
 
@@ -72,7 +80,14 @@ files_to_download <- c(
   "fink_surf_data_hippunfold.zip",
   "spreng_surf_data_cat12.zip",
   "spreng_surf_data_fmriprep.zip",
-  "spreng_surf_data_freesurfer.zip"
+  "spreng_surf_data_freesurfer.zip",
+  "sudmex_conn_surf_data_subcortexmesh.zip",
+  "SUDMEX_CONN_behdata.rds",
+  "SUDMEX_CONN_caudate_curvature.rds",
+  "SUDMEX_CONN_caudate_thickness.rds",
+  "SUDMEX_CONN_thalamus_curvature.rds",
+  "SUDMEX_CONN_thalamus_thickness.rds",
+  "SUDMEX_CONN_allaseg_thickness.rds"
 )
 
 # Download each file
@@ -104,6 +119,7 @@ for (file in files_to_download) {
         if (is.null(zip_result) | inherits(zip_result, "try-error")==TRUE) {untar(tarfile = dest_path, exdir = out_dir)}
         
         if (quiet==FALSE){cat("Unzipped:", file, "\n")}
+        unlink(dest_path) #remove zip file once unzipped
       }
     }, error = function(e) 
     {
