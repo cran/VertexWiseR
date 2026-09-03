@@ -6,7 +6,7 @@
 #' @param surf_color  color of the cortical surface for NA values. Set to `'grey'` by default. A RGBA string can also be given, with A as the opacity (0 to 1), e.g. for transparent grey: surf_color="rgba(100,100,100,0.5)".
 #' @param cmap A string vector containing 2 to 4 color names/codes specifying the colors to be used for the color scale; or a single string object with the name of a color map listed in `RColorBrewer::display.brewer.all()`. If none are specified, appropriate colors will be automatically selected according to `range(surf_data)`
 #' @param limits A combined pair of numeric vector composed of the lower and upper color scale limits of the plot. When left unspecified, the symmetrical limits `c(-max(abs(surf_dat),max(abs(surf_dat)))` will be used. 
-#' @param atlas atlas used for identifying region labels. 1=Desikan, 2=Destrieux-148, 3=Glasser-360, 4=Schaefer-100, 5=Schaefer-200, 6=Schaefer-400. Set to `1` by default. This argument is ignored for HippUnfold hippocampal surfaces and SubCortexMesh subcortical surface.
+#' @param atlas atlas used for identifying region labels. 1=Desikan, 2=Destrieux-148, 3=Glasser-360, 4=Schaefer-100, 5=Schaefer-200, 6=Schaefer-400. Set to `1` by default. This argument is ignored for HippUnfold hippocampal surfaces. For applicable SubCortexMesh surfaces, 1=default base ROI, 2=anatomical atlas.
 #' @param hemi A string specifying the hemisphere to plot. Possible values are `l` (left), `r` (right) or `b` (both).
 #' @param medial_gap A numeric value specifying the amount of gap (in MNI coordinate units) to separate the left and right hemispheres. Set to `0` (no gap between hemispheres) by default. In order to view the medial surfaces clearly, it is recommended that this value is set to `20`. This argument is ignored if `hemi!='b'`
 #' @param orientation_labels A boolean object specifying if orientation labels are to be displayed. Set to `TRUE` by default
@@ -139,6 +139,15 @@ plot_surf3d=function(surf_data, surf_color="grey", cmap, limits, atlas=1, hemi="
 
     ROImap <- scm_database_fetcher(n_vert,'ROImap', template)
     ROImap <- list(ROImap@data, ROImap@atlases)
+    
+    #anatomical subparcellations do not exist for the caudate, putamen, or
+    #accumbens area, in fsaverage, we so ignore
+    if (atlas==2 & (n_vert %in% c(6940, 8394, 2044) | template=='fslfirst'))
+    {
+      warning('The atlas argument was set back to 1 as no parcellations apply to the selected ROI.')
+      atlas=1
+    }
+    
   } else if (n_vert %in% c(95718,82412) ) #need special code for all subcortices
   {
     #specify template 

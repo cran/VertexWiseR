@@ -434,7 +434,7 @@ TFCE.multicore=function(data,tail=tail,nthread,envir,edgelist)
 #' 
 #' @param TFCEoutput An object containing the output from TFCE_vertex_analysis()
 #' @param p A numeric object specifying the p-value to threshold the results (Default is 0.05)
-#' @param atlas A numeric integer object corresponding to the atlas of interest.  1=Desikan, 2=Destrieux-148, 3=Glasser-360, 4=Schaefer-100, 5=Schaefer-200, 6=Schaefer-400. Set to `1` by default. This argument is ignored for hippocampal surfaces.
+#' @param atlas A numeric integer object corresponding to the atlas of interest.  1=Desikan, 2=Destrieux-148, 3=Glasser-360, 4=Schaefer-100, 5=Schaefer-200, 6=Schaefer-400. Set to `1` by default. This argument is ignored for hippocampal surfaces. For applicable SubCortexMesh surfaces, 1=default base ROI, 2=anatomical atlas.
 #' @param k Cluster-forming threshold (Default is 20)
 #' @param VWR_check A boolean object specifying whether to check and validate system requirements. Default is TRUE.
 #'
@@ -547,6 +547,14 @@ TFCE_threshold=function(TFCEoutput, p=0.05, atlas=1, k=20, VWR_check = TRUE)
     ROImap <- scm_database_fetcher(n_vert,'ROImap', template)
     ROImap <- list(ROImap@data, ROImap@atlases)
     assign("ROImap", ROImap, envir = internalenv)
+    
+    #anatomical subparcellations do not exist for the caudate, putamen, or
+    #accumbens area, in fsaverage, we so ignore
+    if (atlas==2 & (n_vert %in% c(6940, 8394, 2044) | template=='fslfirst'))
+    {
+      warning('The atlas argument was set back to 1 as no parcellations apply to the selected ROI.')
+      atlas=1
+    }
     
     #here, MNImap is extracted from template surface
     brainspace.mesh.mesh_io=reticulate::import("brainspace.mesh.mesh_io", delay_load = TRUE)
