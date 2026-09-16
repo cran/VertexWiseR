@@ -1,8 +1,17 @@
+# VertexWiseR v1.5.4
+
+## FIXES
+
+* The label mapping for the allaseg surface had the wrong labels in the cluster summaries and plot_surf3d() when the 1.5.3 atlas was introduced. The maps downloadable on github were updated and plot_surf3d() fixed to show the right parcellation name when hovering the cursor. Other regions remain unaffected. To get the most up-to-date maps for SubCortexMesh objects if downloaded already, users need to remove it: extdatadir=system.file('extdata/scm_database/', package='VertexWiseR').
+* Fix for TFCE models with the "inverse=TRUE" option. Permutated models were not indexing systematically the right contrast variable when producing a random t-map at each permutation. This did not apply for RFT or the mixed models.
+
 # VertexWiseR v1.5.3
 
 ## NEW FEATURES
 
 * Since SubCortexMesh v1.1.0, some subcortical ROIs (in fsaverage space) also have [atlas sub-parcellations](https://subcortexmesh.readthedocs.io/en/1.1.0/atlases.html). They can be selected as descriptive region labels in the outputs of RFT and TFCE models, as well as in the hovering information in plotsurf_3d() (atlas=1 for default base ROI, atlas=2 for the anatomical atlas). This works with the thalamus, hippocampus, amygdala, ventral DC, pallidum, cerebellum and brain-stem. The "Example analyses with VertexWiseR - Example 3" vignette shows an example of it.
+
+To get the most up-to-date maps for SubCortexMesh objects, users need to remove: extdatadir=system.file('extdata/scm_database/', package='VertexWiseR'). VertexWiseR will then prompt users to download them again from Github whenever they try to analyse SubCortexMesh's subcortical regions. Example 3 was also fixed accordingly.
 
 ## FIXES
 
